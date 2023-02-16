@@ -14,11 +14,21 @@ export class PrivateComponent {
   constructor(public auth: AuthService, private http: HttpClient) {}
 
   ngOnInit() {
+    this.auth.getTokenSilently$().subscribe({
+      next: (token: any) => {
+        this.privateRequest(token);
+      },
+      error: (err: any) => (this.message = err.message),
+    });
+  }
+
+  privateRequest(token: string) {
     this.http
-      .get<string>(environment.apiUrl + 'base/private')
+      .get<any>(environment.apiUrl + 'base/private', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .subscribe({
-        next: (msg) => (this.message = msg),
-        error: (err) => (this.message = err.message),
+        next: (msg) => (this.message = msg.message),
       });
   }
 }

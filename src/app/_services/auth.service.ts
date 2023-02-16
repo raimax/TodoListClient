@@ -74,15 +74,8 @@ export class AuthService {
       concatMap((client: Auth0Client) => from(client.getUser())),
       tap((user) => {
         this.userProfileSubject$.next(user);
-        this.register();
       })
     );
-  }
-
-  private register() {
-    this.httpClient.post(environment.apiUrl + 'users', null).subscribe({
-      error: (err) => console.log('Registration failed:', err),
-    });
   }
 
   private localAuthSetup() {

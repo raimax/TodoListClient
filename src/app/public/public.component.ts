@@ -13,8 +13,9 @@ export class PublicComponent {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.http
-      .get<string>(environment.apiUrl + 'base/public')
-      .subscribe({ next: (msg) => (this.message = msg) });
+    this.http.get<any>(environment.apiUrl + 'base/public').subscribe({
+      next: (msg) => (this.message = msg.message),
+      error: (err) => console.log(err.message),
+    });
   }
 }
