@@ -1,27 +1,2 @@
-<div>
-  <button (click)="auth.login()" *ngIf="!auth.loggedIn">Log In</button>
-  <button (click)="auth.logout()" *ngIf="auth.loggedIn">Log Out</button>
-
-  <div *ngIf="auth.loggedIn">
-    <div *ngIf="auth.userProfile$ | async; let user">
-      <p>{{ user.name }}</p>
-      <img src="{{ user.picture }}" alt="{{ user.name }}" />
-    </div>
-
-		<form (ngSubmit)="createItem()">
-			<input type="text" [(ngModel)]="input" required name="content" />
-			<button type="submit">Add</button>
-		</form>
-	
-		<div>
-			<div *ngIf="todoItems.length > 0">
-				<div class="item-list" *ngFor="let item of todoItems">
-					<div class="item">{{ item.content }}</div>
-					<div class="item">{{ item.created | date }}</div>
-					<button (click)="deleteItem(item.id)">Delete</button>
-				</div>
-			</div>
-			<p *ngIf="todoItems.length < 1">No items</p>
-		</div>
-  </div>
-</div>
+<app-header></app-header>
+<router-outlet></router-outlet>

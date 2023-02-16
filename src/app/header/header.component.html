@@ -1,0 +1,10 @@
+<div>
+  <button (click)="auth.login()" *ngIf="!auth.loggedIn">Log In</button>
+  <button (click)="auth.logout()" *ngIf="auth.loggedIn">Log Out</button>
+  <div *ngIf="auth.loggedIn">
+    <div *ngIf="auth.userProfile$ | async; let user">
+      <p>{{ user.name }}</p>
+      <img src="{{ user.picture }}" alt="{{ user.name }}" />
+    </div>
+  </div>
+</div>
